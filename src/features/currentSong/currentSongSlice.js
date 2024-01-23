@@ -1,7 +1,5 @@
 import {  createSlice } from '@reduxjs/toolkit';
 
-
-
 const initialState = {
     audio:null,
     song:null,
@@ -33,11 +31,6 @@ export const currentSongSlice = createSlice({
         },
         playAll: (state,action) => {
             state.playAll = !state.playAll
-            // state.isPlayed = true
-            // state.audio = new Audio()
-            // state.audio.src = action.payload.song.src
-            // state.audio.currentTime = 0
-            // state.song = action.payload.song
             state.playAllSongs = action.payload.songs
         },
         playAllWithSong: (state,action) => {
@@ -49,11 +42,9 @@ export const currentSongSlice = createSlice({
             state.song = action.payload.song
             state.playAllSongs = action.payload.songs
         }
-
     },
-
 });
 
-export const { playSong,closeCurrentSong,togglePlaying,playAll,togglePlayAll,playAllWithSong } = currentSongSlice.actions;
+export const { playSong,closeCurrentSong,togglePlaying,playAll,playAllWithSong } = currentSongSlice.actions;
 
 export default currentSongSlice.reducer;

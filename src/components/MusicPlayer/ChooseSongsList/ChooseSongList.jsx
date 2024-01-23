@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux"
 import s from "./ChooseSongList.module.css"
-import {FaPlus} from "react-icons/fa";
+import {FaMusic} from "react-icons/fa";
 import { showAllSongs, showFavorites } from '../../../features/songList/songListSlice';
 import Button from "../../Button/Button";
+import React from "react";
+import {MdFavorite} from "react-icons/md";
 
 const ChooseSongList = (props) => {
 
@@ -12,7 +14,7 @@ const ChooseSongList = (props) => {
         <div className={s.chooseSongsList}>
                 <Button
                 title="All Songs" 
-                icon={<FaPlus />}
+                icon={<FaMusic/>}
                 style={ !props.songs.favorites.status ?
                     (
                         {
@@ -27,7 +29,7 @@ const ChooseSongList = (props) => {
                 />
                 <Button 
                 title="Favorites" 
-                icon={<FaPlus />}
+                icon={ <MdFavorite />}
                 style={props.songs.favorites.status ?
                     (
                         {

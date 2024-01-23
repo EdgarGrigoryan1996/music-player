@@ -12,3 +12,9 @@
 .secondNavigationBlock{
     position: relative;
 }
+
+@media screen and (max-width: 1024px){
+    .player{
+        width: 95%;
+    }
+}

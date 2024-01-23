@@ -25,7 +25,6 @@ function MusicPlayer() {
                 <MusicUploadForm />
                 <ChooseSongList songs={songs} />
             </div>
-            
 
             <SongList songs={songs.favorites.status ? songs.favorites.favSongs : songs.data}/>
 
@@ -37,11 +36,8 @@ function MusicPlayer() {
                     </div>
                 )
             }
-
         </div>
-
     );
-
 }
 
 export default MusicPlayer;

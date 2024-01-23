@@ -1,11 +1,11 @@
 import {createSlice } from '@reduxjs/toolkit';
 import data from "../../musicData/data";
 
-
 const initialState = {
     data:data,
     favorites: {
         status:false,
+        favSongsAll:[],
         favSongs:[]
     }
 }
@@ -15,9 +15,17 @@ export const songListSlice = createSlice({
     initialState,
     reducers: {
         filterByName: (state,action) => {
-            state.data = data.filter((song) => {
-                return song.title.toLowerCase().includes(action.payload.toLowerCase()) || song.artists.toLowerCase().includes(action.payload.toLowerCase())
-            })
+            if(!state.favorites.status){
+                state.data = data.filter((song) => {
+                    return song.title.toLowerCase().includes(action.payload.toLowerCase()) || song.artists.toLowerCase().includes(action.payload.toLowerCase())
+                })
+            } else {
+
+                state.favorites.favSongs = state.favorites.favSongsAll.filter((song) => {
+                    return song.title.toLowerCase().includes(action.payload.toLowerCase()) || song.artists.toLowerCase().includes(action.payload.toLowerCase())
+                })
+            }
+
         },
         sort:(state,action) => {
             if(!state.favorites.status){
@@ -81,10 +89,14 @@ export const songListSlice = createSlice({
         },
         addSongToFavorite: (state,action) => {
             state.favorites.favSongs.push(action.payload)
+            state.favorites.favSongsAll.push(action.payload)
             
         },
         removeSongFromFavorite: (state, action) => {
             state.favorites.favSongs = state.favorites.favSongs.filter((song) => {
+                return song.id !== action.payload.id
+            })
+            state.favorites.favSongsAll = state.favorites.favSongsAll.filter((song) => {
                 return song.id !== action.payload.id
             })
         }

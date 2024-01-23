@@ -11,3 +11,9 @@
     font-size: 18px;
     padding: 10px 0;
 }
+
+@media screen and (max-width: 756px){
+    .songsTable th{
+        font-size: 10px;
+    }
+}

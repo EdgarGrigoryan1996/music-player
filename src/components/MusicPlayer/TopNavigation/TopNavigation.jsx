@@ -6,7 +6,7 @@ import {CiSearch} from "react-icons/ci";
 import MySelect from "./MySelect/MySelect";
 import {useDispatch} from "react-redux";
 import {filterByName, sort} from "../../../features/songList/songListSlice";
-import {playAll, playAllWithSong, togglePlayAll} from "../../../features/currentSong/currentSongSlice";
+import {playAll, playAllWithSong} from "../../../features/currentSong/currentSongSlice";
 
 
 const options = [
@@ -32,12 +32,12 @@ function TopNavigation(props) {
         song:props.songs[0],
         songs:props.songs
     }
-    console.log(props.currentSong.playAll)
+
     useEffect(() => {
         filterByCurrentText(dispatch,filterByName,searchSongText)
     },[searchSongText])
+
     useEffect(() => {
-        console.log(props.songs)
         if(selectedValue !== null){
             dispatch(sort(selectedValue.value))
         }
@@ -59,7 +59,6 @@ function TopNavigation(props) {
                                     handlePlayAll(dispatch,playAllWithSong,playAllSongsPayload)
                                 }
                             }
-                            
                         }
                     }
                         title="Play All"
@@ -73,7 +72,6 @@ function TopNavigation(props) {
                             )
                             :
                             null
-
                     }
                     />
                     <Button title="Add All" icon={<FaPlus />}/>
@@ -92,19 +90,15 @@ function TopNavigation(props) {
                             value={searchSongText}
                             onChange={(e) => {
                                     setSearchSongText(e.target.value)
-                                    // dispatch(filterByName(searchSongText))
-
                                 }
                             }
-                            placeholder="Filter"
+                            placeholder="Search"
                         />
                     </div>
-
                 </div>
             </div>
         </div>
     );
-
 }
 
 export default TopNavigation;

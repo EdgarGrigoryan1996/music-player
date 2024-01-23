@@ -17,7 +17,7 @@ function SongList(props) {
                     </tr>
                     {props.songs.map((song) => {
                         return (
-                            <SongRow songs={props.songs} song={song}/>
+                            <SongRow key={song.id} songs={props.songs} song={song}/>
                         )
                     })}
     
@@ -28,6 +28,7 @@ function SongList(props) {
     } else {
         return (
             <div>
+                <h5>No Songs to show</h5>
                 <iframe style={
                         {
                             border:"none",

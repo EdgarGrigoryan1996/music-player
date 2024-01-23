@@ -9,7 +9,7 @@ function MySelect(props) {
                     ...baseStyles,
                     borderColor: state.isFocused ? 'grey' : '#ccc',
                     backgroundColor:"#f8f8f8",
-                    width:"200px",
+                    width:"150px",
                     outline:"none",
                     border: 0,
                     boxShadow: 'none',

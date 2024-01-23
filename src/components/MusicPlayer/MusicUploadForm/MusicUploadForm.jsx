@@ -3,7 +3,7 @@ import Button from "../../Button/Button"
 import s from "./MusicUploadForm.module.css"
 import loadingIcon from "../../../assets/animatedIcons/loading.svg"
 import checkFileIsMusic from "../../../utils/checkFileIsMusic"
-
+import {IoClose, IoCloudUploadOutline} from "react-icons/io5";
 
 const MusicUploadForm = () => {
 
@@ -22,7 +22,6 @@ const MusicUploadForm = () => {
     },[isUploading])
 
     const checkUploadingFile = (e) => {
-
         setUploadStatus({
             ...uploadStatus,
             isUploading:true
@@ -40,31 +39,35 @@ const MusicUploadForm = () => {
                     isUploading:false,
                     success:false
                 })
+                setUploadFile(null)
+                uploadBtnRef.current.value = ''
             }
         },2000)
     }
+
     return (
+
         <div className={s.musicUploadForm}>
-            <Button 
-            title={uploadFile ? uploadFile.name : uploadStatus.isUploading ? "Loading..." : "Choose Music File"}
-            icon={uploadStatus.isUploading ? loadingIcon : null} 
-            onclick={() => uploadBtnRef.current.click()}
-            style={{
-                height:"50px"
-            }}
-            >
-                <input ref={uploadBtnRef} className={s.uploadInput} type="file" onChange={(e) => {
-                    setIsUploading(true)
-                }}/>
-            </Button>
+            <div className={s.uploadBtn}>
+                <Button
+                    title={uploadFile ? uploadFile.name : uploadStatus.isUploading ? "Loading..." : "Choose Music File"}
+                    icon={uploadStatus.isUploading ? loadingIcon : <IoCloudUploadOutline size={18}/>}
+                    onclick={() => uploadBtnRef.current.click()}
+                >
+                    <input ref={uploadBtnRef} className={s.uploadInput} type="file" onChange={(e) => {
+                        setIsUploading(true)
+                    }}/>
+                </Button>
+            </div>
+
             {uploadFile && 
-                <span className={s.removeUploadMusic} onClick={() => {
+                <div className={s.removeUploadMusic} onClick={() => {
                     setUploadFile(null)
+                    uploadBtnRef.current.value = ''
                 }
-            }>x</span>
+            }><IoClose /></div>
             }
             {uploadStatus.success === false && <span className={s.musicTypeErrMsg}>File type is not valid</span>}
-            
         </div>
     )
 }
