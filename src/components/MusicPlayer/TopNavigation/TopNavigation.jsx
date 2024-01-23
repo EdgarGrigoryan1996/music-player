@@ -50,11 +50,16 @@ function TopNavigation(props) {
                 <div className={s.navigationLine}>
                     <Button
                         onclick={() => {
-                            if(props.currentSong.audio){
-                                handlePlayAll(dispatch,playAll,playAllSongsPayload)
+                            if(props.songs.length === 0) {
+                                alert("No Songs to Play")
                             } else {
-                                handlePlayAll(dispatch,playAllWithSong,playAllSongsPayload)
+                                if(props.currentSong.audio){
+                                    handlePlayAll(dispatch,playAll,playAllSongsPayload)
+                                } else {
+                                    handlePlayAll(dispatch,playAllWithSong,playAllSongsPayload)
+                                }
                             }
+                            
                         }
                     }
                         title="Play All"

@@ -1,8 +1,18 @@
+tr.songRow {
+    transition: 0.2s;
+}
+tr.songRow:hover {
+    
+    background: radial-gradient(at center center, rgb(247, 237, 225) 0%, rgba(247, 237, 225, 0) 70%);
+    backdrop-filter: blur(40px);
+    background-color: rgb(255, 250, 250);
+}
 tr.songRow td{
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
     font-size: 18px;
 }
+
 .songImage{
     width: 75px;
     height: 75px;

@@ -8,8 +8,15 @@
     align-items: center;
     gap: 6px;
     transition: 0.2s;
+    position: relative;
 }
 .customButton:hover{
     background-color: #dcdcdc;
     color: #3e3e3e;
+}
+.loadingAnimation{
+    
+    width: 50px;
+    height: 25px;
+    transform: scale(1.5);
 }

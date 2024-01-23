@@ -8,9 +8,14 @@ import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import PauseRounded from "@mui/icons-material/PauseRounded";
 import IconButton from "@mui/material/IconButton";
 import secondToMinute from "../../../../utils/secondToMinute";
+import { addSongToFavorite, removeSongFromFavorite } from '../../../../features/songList/songListSlice';
+import axios from 'axios';
 
 function SongRow({song}) {
     const dispatch = useDispatch()
+    const favSongs = useSelector((state) => {
+        return state.songList.favorites.favSongs
+    })
     const currentSong = useSelector((state) => {
         return state.currentSong
     })
@@ -34,9 +39,6 @@ function SongRow({song}) {
                             }
 
                         }
-
-
-
                     }}
                 >
                     <span className={s.playIcon}>
@@ -73,9 +75,21 @@ function SongRow({song}) {
             <td>{secondToMinute(song.duration)}</td>
             <td>
                 <div className={s.songIconsBlock}>
-                    <span className={s.iconButton}><TiHeartFullOutline /></span>
+                    <span className={s.iconButton} onClick={() => {
+                        if(!favSongs.includes(song)){
+                            dispatch(addSongToFavorite(song))
+                        } else {
+                            dispatch(removeSongFromFavorite(song))
+                        }
+                    }
+                    }><TiHeartFullOutline color={favSongs.includes(song) ? "#ff5252" : "#111"}/></span>
                     <span className={s.iconButton}><MdDone /></span>
-                    <span className={s.iconButton}><TiArrowForward /></span>
+                    <span className={s.iconButton}>
+                        <a href={song.src} target='_blank' download="music">
+                            <TiArrowForward />
+                        </a>
+                        
+                        </span>
                 </div>
             </td>
         </tr>

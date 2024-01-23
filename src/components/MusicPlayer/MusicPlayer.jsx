@@ -4,10 +4,12 @@ import TopNavigation from "./TopNavigation/TopNavigation";
 import SongList from "./SongList/SongList";
 import {useSelector} from "react-redux";
 import CurrentPlayer from "../CurrentPlayer/CurrentPlayer";
+import ChooseSongList from './ChooseSongsList/ChooseSongList';
+import MusicUploadForm from './MusicUploadForm/MusicUploadForm';
 
-function MusicPlayer(props) {
+function MusicPlayer() {
     const songs = useSelector((state) => {
-        return state.songList.data
+        return state.songList
     })
     const currentSong = useSelector((state) => {
         return state.currentSong
@@ -16,13 +18,22 @@ function MusicPlayer(props) {
     return (
         <div className={s.player}>
             <h1>Music Player</h1>
-            <TopNavigation currentSong={currentSong} songs={songs}/>
-            <SongList songs={songs}/>
+
+            <TopNavigation currentSong={currentSong} songs={songs.favorites.status ? songs.favorites.favSongs : songs.data}/>
+
+            <div className={s.secondNavigationBlock}>
+                <MusicUploadForm />
+                <ChooseSongList songs={songs} />
+            </div>
+            
+
+            <SongList songs={songs.favorites.status ? songs.favorites.favSongs : songs.data}/>
+
             {
                 currentSong.song !== null &&
                 (
                     <div className={s.currentSong}>
-                        <CurrentPlayer songs={songs}  currentSong={currentSong}/>
+                        <CurrentPlayer songs={songs.favorites.status ? songs.favorites.favSongs : songs.data}  currentSong={currentSong}/>
                     </div>
                 )
             }

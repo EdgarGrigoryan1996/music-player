@@ -3,13 +3,16 @@ import data from "../../musicData/data";
 
 
 const initialState = {
-    data:data
+    data:data,
+    favorites: {
+        status:false,
+        favSongs:[]
+    }
 }
 
 export const songListSlice = createSlice({
     name: 'songList',
     initialState,
-    // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         filterByName: (state,action) => {
             state.data = data.filter((song) => {
@@ -17,36 +20,77 @@ export const songListSlice = createSlice({
             })
         },
         sort:(state,action) => {
-            switch (action.payload) {
-                case 'name':
-                    state.data = data.slice().sort((a,b) => {
-                        return a.title.localeCompare(b.title)
-                    })
-                    break;
-                case 'artist':
-                    state.data = data.slice().sort((a,b) => {
-                        return a.artists.localeCompare(b.srtists)
-                    })
-                    break;
-                case 'id':
-                    state.data = data.slice().sort((a,b) => {
-                        return a.id - b.id
-                    })
-                    break;
-                case 'reverse':
-                    state.data = data.slice().sort((a,b) => {
-                        return b.id - a.id
-                    })
-                    break;
-                default:
-                    break;
+            if(!state.favorites.status){
+                switch (action.payload) {
+                    case 'name':
+                        state.data = data.slice().sort((a,b) => {
+                            return a.title.localeCompare(b.title)
+                        })
+                        break;
+                    case 'artist':
+                        state.data = data.slice().sort((a,b) => {
+                            return a.artists.localeCompare(b.srtists)
+                        })
+                        break;
+                    case 'id':
+                        state.data = data.slice().sort((a,b) => {
+                            return a.id - b.id
+                        })
+                        break;
+                    case 'reverse':
+                        state.data = data.slice().sort((a,b) => {
+                            return b.id - a.id
+                        })
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                switch (action.payload) {
+                    case 'name':
+                        state.favorites.favSongs = state.favorites.favSongs.slice().sort((a,b) => {
+                            return a.title.localeCompare(b.title)
+                        })
+                        break;
+                    case 'artist':
+                        state.favorites.favSongs = state.favorites.favSongs.slice().sort((a,b) => {
+                            return a.artists.localeCompare(b.srtists)
+                        })
+                        break;
+                    case 'id':
+                        state.favorites.favSongs = state.favorites.favSongs.slice().sort((a,b) => {
+                            return a.id - b.id
+                        })
+                        break;
+                    case 'reverse':
+                        state.favorites.favSongs = state.favorites.favSongs.slice().sort((a,b) => {
+                            return b.id - a.id
+                        })
+                        break;
+                    default:
+                        break;
+                }
             }
+            
+        },
+        showFavorites: (state) => {
+            state.favorites.status = true
+        },
+        showAllSongs: (state) => {
+            state.favorites.status = false
+        },
+        addSongToFavorite: (state,action) => {
+            state.favorites.favSongs.push(action.payload)
+            
+        },
+        removeSongFromFavorite: (state, action) => {
+            state.favorites.favSongs = state.favorites.favSongs.filter((song) => {
+                return song.id !== action.payload.id
+            })
         }
     }
 });
 
-export const { filterByName,sort } = songListSlice.actions;
-
-// export const selectCount = (state) => state.counter.value;
+export const { filterByName,sort,showFavorites,showAllSongs,addSongToFavorite,removeSongFromFavorite} = songListSlice.actions;
 
 export default songListSlice.reducer;

@@ -9,3 +9,6 @@
     align-items: center;
     width: 100%;
 }
+.secondNavigationBlock{
+    position: relative;
+}
