@@ -1,0 +1,13 @@
+.songs{
+    margin-top: 25px;
+    color: #716e6e;
+}
+.songsTable{
+    width: 100%;
+}
+.songsTable th{
+    background-color: #e1e1e1;
+    color: #716e6e;
+    font-size: 18px;
+    padding: 10px 0;
+}

@@ -1,0 +1,35 @@
+tr.songRow td{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    font-size: 18px;
+}
+.songImage{
+    width: 75px;
+    height: 75px;
+}
+
+.songIconsBlock{
+    display: flex;
+    justify-content: space-around;
+
+}
+.iconButton{
+    font-size: 22px;
+    cursor: pointer;
+    position: relative;
+}
+.playIcon{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    padding: 10px;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -115%);
+    opacity: 0.8;
+}
